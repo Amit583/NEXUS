@@ -1,0 +1,21 @@
+﻿# Python virtual environment
+backend/nexus/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment
+.env
+
+# Node
+node_modules/
+dist/
+
+# Tauri
+target/
+
+# Local data
+data/database/
+data/cache/
+data/logs/
