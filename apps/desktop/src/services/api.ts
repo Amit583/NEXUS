@@ -27,6 +27,30 @@ export interface GoalUpdate {
   progress?: number;
 }
 
+export interface Project {
+  id: number;
+  title: string;
+  description: string;
+  status: "active" | "in_progress" | "completed";
+  progress: number;
+  goal_id: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ProjectCreate {
+  title: string;
+  description: string;
+  goal_id?: number | null;
+}
+
+export interface ProjectUpdate {
+  title?: string;
+  description?: string;
+  progress?: number;
+  goal_id?: number | null;
+}
+
 export async function checkBackendHealth(): Promise<HealthResponse> {
   const response = await fetch(`${API_BASE_URL}/health`);
 
@@ -102,6 +126,71 @@ export async function deleteGoal(
 ): Promise<void> {
   const response = await fetch(
     `${API_BASE_URL}/goals/${goalId}`,
+    {
+      method: "DELETE",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(`Backend returned HTTP ${response.status}`);
+  }
+}
+
+export async function getProjects(): Promise<Project[]> {
+  const response = await fetch(`${API_BASE_URL}/projects`);
+
+  if (!response.ok) {
+    throw new Error(`Backend returned HTTP ${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function createProject(
+  data: ProjectCreate,
+): Promise<Project> {
+  const response = await fetch(`${API_BASE_URL}/projects`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Backend returned HTTP ${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function updateProject(
+  projectId: number,
+  data: ProjectUpdate,
+): Promise<Project> {
+  const response = await fetch(
+    `${API_BASE_URL}/projects/${projectId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(`Backend returned HTTP ${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function deleteProject(
+  projectId: number,
+): Promise<void> {
+  const response = await fetch(
+    `${API_BASE_URL}/projects/${projectId}`,
     {
       method: "DELETE",
     },

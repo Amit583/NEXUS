@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { AppLayout } from "../layouts/AppLayout";
 import { Home } from "../pages/Home/Home";
 import { Goals } from "../pages/Goals/Goals";
+import { Projects } from "../pages/Projects/Projects";
 
 function Placeholder({ title }: { title: string }) {
   return (
@@ -19,7 +20,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/goals", element: <Goals /> },
-      { path: "/projects", element: <Placeholder title="Projects" /> },
+      { path: "/projects", element: <Projects /> },
       { path: "/tasks", element: <Placeholder title="Tasks" /> },
       { path: "/roadmaps", element: <Placeholder title="Roadmaps" /> },
       { path: "/learning", element: <Placeholder title="Learning" /> },
