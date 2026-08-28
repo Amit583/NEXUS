@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from ..engines.progress_engine import (
-    calculate_goal_status,
+    calculate_progress_status,
 )
 from ..repositories.goals import GoalRepository
 from ..schemas.goals import (
@@ -68,7 +68,7 @@ class GoalService:
 
             goal.progress = progress
             goal.status = (
-                calculate_goal_status(progress)
+                calculate_progress_status(progress)
             )
 
         db.commit()

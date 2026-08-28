@@ -1,4 +1,4 @@
-def calculate_goal_status(
+def calculate_progress_status(
     progress: int,
 ) -> str:
     """

@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .api.router import api_router
 from .database.connection import Base, engine
 from .models.goal import Goal
-
+from .models.project import Project
 
 Base.metadata.create_all(bind=engine)
 
