@@ -1,3 +1,4 @@
+import { ConfirmDialog } from "../../components/dialogs/ConfirmDialog";
 import { useState } from "react";
 import {
   useMutation,
@@ -33,6 +34,8 @@ export function Goals() {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [goalToDelete, setGoalToDelete] =
+    useState<Goal | null>(null);
 
   const goalsQuery = useQuery({
     queryKey: ["goals"],
@@ -246,7 +249,7 @@ export function Goals() {
               <button
                 type="button"
                 onClick={() =>
-                  deleteMutation.mutate(goal.id)
+                  setGoalToDelete(goal)
                 }
               >
                 Delete
@@ -280,6 +283,24 @@ export function Goals() {
           </article>
         ))}
       </div>
+      <ConfirmDialog
+        open={goalToDelete !== null}
+        title="Delete goal?"
+        message={
+          goalToDelete
+            ? `Are you sure you want to delete "${goalToDelete.title}"? This action cannot be undone.`
+            : ""
+        }
+        confirmText="Delete Goal"
+        cancelText="Cancel"
+        onCancel={() => setGoalToDelete(null)}
+        onConfirm={() => {
+          if (goalToDelete) {
+            deleteMutation.mutate(goalToDelete.id);
+            setGoalToDelete(null);
+          }
+        }}
+      />
     </div>
   );
 }

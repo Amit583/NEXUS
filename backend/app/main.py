@@ -5,6 +5,7 @@ from .api.router import api_router
 from .database.connection import Base, engine
 from .models.goal import Goal
 from .models.project import Project
+from .models.task import Task
 
 Base.metadata.create_all(bind=engine)
 

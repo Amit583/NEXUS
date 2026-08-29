@@ -51,6 +51,30 @@ export interface ProjectUpdate {
   goal_id?: number | null;
 }
 
+export interface Task {
+  id: number;
+  title: string;
+  description: string;
+  status: "active" | "in_progress" | "completed";
+  progress: number;
+  project_id: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface TaskCreate {
+  title: string;
+  description: string;
+  project_id?: number | null;
+}
+
+export interface TaskUpdate {
+  title?: string;
+  description?: string;
+  progress?: number;
+  project_id?: number | null;
+}
+
 export async function checkBackendHealth(): Promise<HealthResponse> {
   const response = await fetch(`${API_BASE_URL}/health`);
 
@@ -186,6 +210,71 @@ export async function updateProject(
   return response.json();
 }
 
+export async function getTasks(): Promise<Task[]> {
+  const response = await fetch(`${API_BASE_URL}/tasks`);
+
+  if (!response.ok) {
+    throw new Error(`Backend returned HTTP ${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function createTask(
+  data: TaskCreate,
+): Promise<Task> {
+  const response = await fetch(`${API_BASE_URL}/tasks`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Backend returned HTTP ${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function updateTask(
+  taskId: number,
+  data: TaskUpdate,
+): Promise<Task> {
+  const response = await fetch(
+    `${API_BASE_URL}/tasks/${taskId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(`Backend returned HTTP ${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function deleteTask(
+  taskId: number,
+): Promise<void> {
+  const response = await fetch(
+    `${API_BASE_URL}/tasks/${taskId}`,
+    {
+      method: "DELETE",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(`Backend returned HTTP ${response.status}`);
+  }
+}
+
 export async function deleteProject(
   projectId: number,
 ): Promise<void> {
@@ -195,6 +284,8 @@ export async function deleteProject(
       method: "DELETE",
     },
   );
+
+  
 
   if (!response.ok) {
     throw new Error(`Backend returned HTTP ${response.status}`);

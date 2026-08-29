@@ -3,6 +3,7 @@ import { AppLayout } from "../layouts/AppLayout";
 import { Home } from "../pages/Home/Home";
 import { Goals } from "../pages/Goals/Goals";
 import { Projects } from "../pages/Projects/Projects";
+import { Tasks } from "../pages/Tasks/Tasks";
 
 function Placeholder({ title }: { title: string }) {
   return (
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/goals", element: <Goals /> },
       { path: "/projects", element: <Projects /> },
-      { path: "/tasks", element: <Placeholder title="Tasks" /> },
+      { path: "/tasks", element: <Tasks /> },
       { path: "/roadmaps", element: <Placeholder title="Roadmaps" /> },
       { path: "/learning", element: <Placeholder title="Learning" /> },
       { path: "/knowledge", element: <Placeholder title="Knowledge" /> },

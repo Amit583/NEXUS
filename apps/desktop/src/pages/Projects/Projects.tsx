@@ -1,3 +1,4 @@
+import { ConfirmDialog } from "../../components/dialogs/ConfirmDialog";
 import { useState } from "react";
 import {
     useMutation,
@@ -36,6 +37,8 @@ export function Projects() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [goalId, setGoalId] = useState("");
+    const [projectToDelete, setProjectToDelete] =
+        useState<Project | null>(null);
 
     const projectsQuery = useQuery({
         queryKey: ["projects"],
@@ -345,9 +348,7 @@ export function Projects() {
                             <button
                                 type="button"
                                 onClick={() =>
-                                    deleteMutation.mutate(
-                                        project.id,
-                                    )
+                                    setProjectToDelete(project)
                                 }
                             >
                                 Delete
@@ -388,6 +389,29 @@ export function Projects() {
                     </article>
                 ))}
             </div>
+            <ConfirmDialog
+                open={projectToDelete !== null}
+                title="Delete project?"
+                message={
+                    projectToDelete
+                        ? `Are you sure you want to delete "${projectToDelete.title}"? This action cannot be undone.`
+                        : ""
+                }
+                confirmText="Delete Project"
+                cancelText="Cancel"
+                onCancel={() =>
+                    setProjectToDelete(null)
+                }
+                onConfirm={() => {
+                    if (projectToDelete) {
+                        deleteMutation.mutate(
+                            projectToDelete.id,
+                        );
+
+                        setProjectToDelete(null);
+                    }
+                }}
+            />
         </div>
     );
 }
