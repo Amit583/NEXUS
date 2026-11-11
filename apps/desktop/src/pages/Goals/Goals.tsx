@@ -1,6 +1,13 @@
 import { ConfirmDialog } from "../../components/dialogs/ConfirmDialog";
 import { useState } from "react";
 import {
+  CheckCircle2,
+  Circle,
+  LoaderCircle,
+  Target,
+  TrendingUp,
+} from "lucide-react";
+import {
   useMutation,
   useQuery,
   useQueryClient,
@@ -135,49 +142,84 @@ export function Goals() {
         </div>
       </div>
       <div className="goals-summary">
-        <div className="goal-summary-card">
-          <span className="goal-summary-label">
-            TOTAL GOALS
-          </span>
-          <strong className="goal-summary-value">
-            {totalGoals}
-          </strong>
+        <div className="goal-summary-card summary-projects">
+          <div className="summary-card-content">
+            <span className="goal-summary-label">
+              TOTAL GOALS
+            </span>
+
+            <strong className="goal-summary-value">
+              {totalGoals}
+            </strong>
+          </div>
+
+          <div className="summary-icon">
+            <Target />
+          </div>
         </div>
 
-        <div className="goal-summary-card">
-          <span className="goal-summary-label">
-            ACTIVE
-          </span>
-          <strong className="goal-summary-value">
-            {activeGoals}
-          </strong>
+        <div className="goal-summary-card summary-active">
+          <div className="summary-card-content">
+            <span className="goal-summary-label">
+              ACTIVE
+            </span>
+
+            <strong className="goal-summary-value">
+              {activeGoals}
+            </strong>
+          </div>
+
+          <div className="summary-icon">
+            <Circle />
+          </div>
         </div>
 
-        <div className="goal-summary-card">
-          <span className="goal-summary-label">
-            IN PROGRESS
-          </span>
-          <strong className="goal-summary-value">
-            {inProgressGoals}
-          </strong>
+        <div className="goal-summary-card summary-progress">
+          <div className="summary-card-content">
+            <span className="goal-summary-label">
+              IN PROGRESS
+            </span>
+
+            <strong className="goal-summary-value">
+              {inProgressGoals}
+            </strong>
+          </div>
+
+          <div className="summary-icon">
+            <LoaderCircle />
+          </div>
         </div>
 
-        <div className="goal-summary-card">
-          <span className="goal-summary-label">
-            COMPLETED
-          </span>
-          <strong className="goal-summary-value">
-            {completedGoals}
-          </strong>
+        <div className="goal-summary-card summary-completed">
+          <div className="summary-card-content">
+            <span className="goal-summary-label">
+              COMPLETED
+            </span>
+
+            <strong className="goal-summary-value">
+              {completedGoals}
+            </strong>
+          </div>
+
+          <div className="summary-icon">
+            <CheckCircle2 />
+          </div>
         </div>
 
-        <div className="goal-summary-card">
-          <span className="goal-summary-label">
-            OVERALL PROGRESS
-          </span>
-          <strong className="goal-summary-value">
-            {overallProgress}%
-          </strong>
+        <div className="goal-summary-card summary-overall">
+          <div className="summary-card-content">
+            <span className="goal-summary-label">
+              OVERALL PROGRESS
+            </span>
+
+            <strong className="goal-summary-value">
+              {overallProgress}%
+            </strong>
+          </div>
+
+          <div className="summary-icon">
+            <TrendingUp />
+          </div>
         </div>
       </div>
 
@@ -213,14 +255,16 @@ export function Goals() {
       </form>
 
       {goalsQuery.isLoading && (
-        <p>Loading goals...</p>
+        <div className="loading-state">
+          Loading goals...
+        </div>
       )}
 
       {goalsQuery.isError && (
-        <p>
-          Unable to load goals. Make sure the NEXUS
-          backend is running.
-        </p>
+        <div className="error-state">
+          Unable to load goals.
+          Make sure the NEXUS backend is running.
+        </div>
       )}
 
       {goalsQuery.data &&
@@ -257,9 +301,11 @@ export function Goals() {
             </div>
 
             <div className="goal-progress">
-              <label>
-                Progress: {goal.progress}%
-              </label>
+              <div className="goal-progress-header">
+                <span>PROGRESS</span>
+
+                <strong>{goal.progress}%</strong>
+              </div>
 
               <input
                 type="range"

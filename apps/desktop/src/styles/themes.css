@@ -1,0 +1,13 @@
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background:
+    radial-gradient(
+      circle at 75% 0%,
+      rgba(87, 119, 170, 0.10),
+      transparent 32%
+    ),
+    var(--bg-app);
+}

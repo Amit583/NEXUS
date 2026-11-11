@@ -274,7 +274,6 @@ export async function deleteTask(
     throw new Error(`Backend returned HTTP ${response.status}`);
   }
 }
-
 export async function deleteProject(
   projectId: number,
 ): Promise<void> {
@@ -284,8 +283,6 @@ export async function deleteProject(
       method: "DELETE",
     },
   );
-
-  
 
   if (!response.ok) {
     throw new Error(`Backend returned HTTP ${response.status}`);

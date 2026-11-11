@@ -1,0 +1,238 @@
+:root {
+  /* =========================================
+     NEXUS FOUNDATION
+     ========================================= */
+
+  --bg-app: #080d19;
+  --bg-sidebar: #0d1424;
+  --bg-surface: #111a2d;
+  --bg-card: #162137;
+  --bg-input: #0e1728;
+
+  --bg-hover: #1b2944;
+  --bg-active: #223456;
+
+  /* =========================================
+     ELEVATED / GLASS SURFACES
+     ========================================= */
+
+  --surface-glass: rgba(22, 33, 55, 0.72);
+  --surface-glass-strong: rgba(25, 38, 64, 0.88);
+
+  --surface-purple:
+    linear-gradient(
+      135deg,
+      rgba(111, 72, 190, 0.20),
+      rgba(22, 33, 55, 0.92) 60%
+    );
+
+  --surface-blue:
+    linear-gradient(
+      135deg,
+      rgba(45, 120, 210, 0.18),
+      rgba(22, 33, 55, 0.92) 60%
+    );
+
+  --surface-cyan:
+    linear-gradient(
+      135deg,
+      rgba(34, 190, 220, 0.15),
+      rgba(22, 33, 55, 0.92) 60%
+    );
+
+  --surface-violet:
+    linear-gradient(
+      135deg,
+      rgba(170, 75, 220, 0.16),
+      rgba(22, 33, 55, 0.92) 60%
+    );
+
+  /* =========================================
+     TEXT
+     ========================================= */
+
+  --text: #f5f7ff;
+  --text-primary: #f5f7ff;
+  --text-secondary: #b7c1d6;
+  --text-muted: #7f8da8;
+  --text-subtle: #62708b;
+
+  /* =========================================
+     BORDERS
+     ========================================= */
+
+  --border: rgba(148, 163, 184, 0.16);
+  --border-strong: rgba(148, 163, 184, 0.30);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+
+  --border-purple: rgba(155, 108, 255, 0.45);
+  --border-blue: rgba(92, 169, 255, 0.42);
+  --border-cyan: rgba(80, 227, 230, 0.40);
+
+  /* =========================================
+     NEXUS ACCENTS
+     ========================================= */
+
+  --accent: #9b6cff;
+  --accent-light: #b293ff;
+
+  --accent-blue: #5ca9ff;
+  --accent-cyan: #50e3e6;
+
+  --accent-purple: #9b6cff;
+  --accent-pink: #e879f9;
+
+  --accent-green: #45d483;
+  --accent-orange: #f6b85d;
+
+  /* =========================================
+     SOFT ACCENT BACKGROUNDS
+     ========================================= */
+
+  --accent-soft: rgba(155, 108, 255, 0.16);
+
+  --blue-soft: rgba(92, 169, 255, 0.14);
+  --cyan-soft: rgba(80, 227, 230, 0.13);
+
+  --purple-soft: rgba(155, 108, 255, 0.15);
+  --pink-soft: rgba(232, 121, 249, 0.13);
+
+  --green-soft: rgba(69, 212, 131, 0.13);
+  --orange-soft: rgba(246, 184, 93, 0.13);
+
+  /* =========================================
+     NEXUS PRIMARY GRADIENTS
+     ========================================= */
+
+  --gradient-primary:
+    linear-gradient(
+      135deg,
+      var(--accent-purple),
+      var(--accent-blue),
+      var(--accent-cyan)
+    );
+
+  --gradient-sidebar-active:
+    linear-gradient(
+      135deg,
+      rgba(155, 108, 255, 0.22),
+      rgba(92, 169, 255, 0.16),
+      rgba(80, 227, 230, 0.12)
+    );
+
+  --gradient-purple:
+    linear-gradient(
+      135deg,
+      rgba(155, 108, 255, 0.28),
+      rgba(50, 65, 125, 0.14)
+    );
+
+  --gradient-blue:
+    linear-gradient(
+      135deg,
+      rgba(92, 169, 255, 0.24),
+      rgba(30, 65, 120, 0.14)
+    );
+
+  --gradient-cyan:
+    linear-gradient(
+      135deg,
+      rgba(80, 227, 230, 0.20),
+      rgba(25, 70, 100, 0.14)
+    );
+
+  --gradient-violet:
+    linear-gradient(
+      135deg,
+      rgba(232, 121, 249, 0.20),
+      rgba(100, 70, 180, 0.14)
+    );
+
+  --gradient-emerald:
+    linear-gradient(
+      135deg,
+      rgba(69, 212, 131, 0.18),
+      rgba(25, 90, 80, 0.14)
+    );
+
+  /* =========================================
+     RGB / FUTURISTIC BORDER
+     ========================================= */
+
+  --rgb-purple: #a970ff;
+  --rgb-blue: #5ca9ff;
+  --rgb-cyan: #50e3e6;
+  --rgb-pink: #e879f9;
+
+  --rgb-gradient:
+    linear-gradient(
+      90deg,
+      var(--rgb-purple),
+      var(--rgb-blue),
+      var(--rgb-cyan),
+      var(--rgb-pink),
+      var(--rgb-purple)
+    );
+
+  /* =========================================
+     GLOWS
+     ========================================= */
+
+  --glow-purple:
+    0 0 28px rgba(155, 108, 255, 0.18);
+
+  --glow-blue:
+    0 0 28px rgba(92, 169, 255, 0.15);
+
+  --glow-cyan:
+    0 0 28px rgba(80, 227, 230, 0.13);
+
+  --glow-rgb:
+    0 0 18px rgba(155, 108, 255, 0.16),
+    0 0 28px rgba(92, 169, 255, 0.12),
+    0 0 38px rgba(80, 227, 230, 0.10);
+
+  /* =========================================
+     STATUS COLORS
+     ========================================= */
+
+  --success: #45d483;
+  --warning: #f6b85d;
+  --danger: #f06f7d;
+
+  /* =========================================
+     RADIUS
+     ========================================= */
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  /* =========================================
+     SHADOWS
+     ========================================= */
+
+  --shadow-card:
+    0 12px 38px rgba(0, 0, 0, 0.26);
+
+  --shadow-card-hover:
+    0 18px 45px rgba(0, 0, 0, 0.34);
+
+  --shadow-dialog:
+    0 30px 90px rgba(0, 0, 0, 0.58);
+
+  --shadow-purple:
+    0 0 32px rgba(155, 108, 255, 0.18);
+
+  --shadow-blue:
+    0 0 32px rgba(92, 169, 255, 0.16);
+
+  /* =========================================
+     TRANSITIONS
+     ========================================= */
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 220ms ease;
+  --transition-slow: 350ms ease;
+}

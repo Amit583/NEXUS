@@ -1,11 +1,19 @@
 import { ConfirmDialog } from "../../components/dialogs/ConfirmDialog";
 import { useState } from "react";
+
+import {
+    FolderKanban,
+    Play,
+    Activity,
+    Check,
+    CircleGauge,
+} from "lucide-react";
+
 import {
     useMutation,
     useQuery,
     useQueryClient,
 } from "@tanstack/react-query";
-
 import {
     createProject,
     deleteProject,
@@ -172,57 +180,86 @@ export function Projects() {
             </div>
 
             <div className="projects-summary">
-                <div className="project-summary-card">
-                    <span className="project-summary-label">
-                        TOTAL PROJECTS
-                    </span>
+                <div className="project-summary-card summary-projects">
+                    <div className="summary-card-content">
+                        <span className="project-summary-label">
+                            TOTAL PROJECTS
+                        </span>
 
-                    <strong className="project-summary-value">
-                        {totalProjects}
-                    </strong>
+                        <strong className="project-summary-value">
+                            {totalProjects}
+                        </strong>
+                    </div>
+
+                    <div className="summary-icon">
+                        <FolderKanban />
+                    </div>
                 </div>
 
-                <div className="project-summary-card">
-                    <span className="project-summary-label">
-                        ACTIVE
-                    </span>
+                <div className="project-summary-card summary-active">
+                    <div className="summary-card-content">
+                        <span className="project-summary-label">
+                            ACTIVE
+                        </span>
 
-                    <strong className="project-summary-value">
-                        {activeProjects}
-                    </strong>
+                        <strong className="project-summary-value">
+                            {activeProjects}
+                        </strong>
+                    </div>
+
+                    <div className="summary-icon">
+                        <Play />
+                    </div>
                 </div>
 
-                <div className="project-summary-card">
-                    <span className="project-summary-label">
-                        IN PROGRESS
-                    </span>
+                <div className="project-summary-card summary-progress">
+                    <div className="summary-card-content">
+                        <span className="project-summary-label">
+                            IN PROGRESS
+                        </span>
 
-                    <strong className="project-summary-value">
-                        {inProgressProjects}
-                    </strong>
+                        <strong className="project-summary-value">
+                            {inProgressProjects}
+                        </strong>
+                    </div>
+
+                    <div className="summary-icon">
+                        <Activity />
+                    </div>
                 </div>
 
-                <div className="project-summary-card">
-                    <span className="project-summary-label">
-                        COMPLETED
-                    </span>
+                <div className="project-summary-card summary-completed">
+                    <div className="summary-card-content">
+                        <span className="project-summary-label">
+                            COMPLETED
+                        </span>
 
-                    <strong className="project-summary-value">
-                        {completedProjects}
-                    </strong>
+                        <strong className="project-summary-value">
+                            {completedProjects}
+                        </strong>
+                    </div>
+
+                    <div className="summary-icon">
+                        <Check />
+                    </div>
                 </div>
 
-                <div className="project-summary-card">
-                    <span className="project-summary-label">
-                        OVERALL PROGRESS
-                    </span>
+                <div className="project-summary-card summary-overall">
+                    <div className="summary-card-content">
+                        <span className="project-summary-label">
+                            OVERALL PROGRESS
+                        </span>
 
-                    <strong className="project-summary-value">
-                        {overallProgress}%
-                    </strong>
+                        <strong className="project-summary-value">
+                            {overallProgress}%
+                        </strong>
+                    </div>
+
+                    <div className="summary-icon">
+                        <CircleGauge />
+                    </div>
                 </div>
             </div>
-
             <form
                 className="project-form"
                 onSubmit={handleSubmit}
@@ -275,14 +312,16 @@ export function Projects() {
             </form>
 
             {projectsQuery.isLoading && (
-                <p>Loading projects...</p>
+                <div className="loading-state">
+                    Loading projects...
+                </div>
             )}
 
             {projectsQuery.isError && (
-                <p>
-                    Unable to load projects. Make sure the
-                    NEXUS backend is running.
-                </p>
+                <div className="error-state">
+                    Unable to load projects.
+                    Make sure the NEXUS backend is running.
+                </div>
             )}
 
             {projectsQuery.data &&
@@ -307,9 +346,13 @@ export function Projects() {
                                 <h2>{project.title}</h2>
 
                                 {getGoalTitle(project.goal_id) && (
-                                    <p className="project-goal">
-                                        Goal: {getGoalTitle(project.goal_id)}
-                                    </p>
+                                    <div className="project-goal">
+                                        <span>LINKED GOAL</span>
+
+                                        <strong>
+                                            {getGoalTitle(project.goal_id)}
+                                        </strong>
+                                    </div>
                                 )}
 
                                 {project.description && (
@@ -356,9 +399,11 @@ export function Projects() {
                         </div>
 
                         <div className="project-progress">
-                            <label>
-                                Progress: {project.progress}%
-                            </label>
+                            <div className="project-progress-header">
+                                <span>PROGRESS</span>
+
+                                <strong>{project.progress}%</strong>
+                            </div>
 
                             <input
                                 type="range"

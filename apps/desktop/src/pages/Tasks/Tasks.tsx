@@ -1,6 +1,13 @@
 import { ConfirmDialog } from "../../components/dialogs/ConfirmDialog";
 import { useState } from "react";
 import type { FormEvent } from "react";
+import {
+  ListTodo,
+  Check,
+  CircleGauge,
+  Activity,
+  Play,
+} from "lucide-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import {
@@ -101,30 +108,149 @@ export function Tasks() {
   }
 
   if (tasksQuery.isLoading || projectsQuery.isLoading) {
-    return <p>Loading tasks...</p>;
+    return (
+      <div className="tasks-page">
+        <div className="page-header">
+          <div>
+            <p className="eyebrow">NEXUS MODULE</p>
+            <h1>Tasks</h1>
+          </div>
+        </div>
+
+        <div className="loading-state">
+          Loading tasks...
+        </div>
+      </div>
+    );
   }
 
   if (tasksQuery.isError || projectsQuery.isError) {
     return (
-      <p>
-        Unable to load Tasks.
-        Make sure the NEXUS backend is running.
-      </p>
+      <div className="tasks-page">
+        <div className="page-header">
+          <div>
+            <p className="eyebrow">NEXUS MODULE</p>
+            <h1>Tasks</h1>
+          </div>
+        </div>
+
+        <div className="error-state">
+          Unable to load Tasks.
+          Make sure the NEXUS backend is running.
+        </div>
+      </div>
     );
   }
 
   const tasks = tasksQuery.data ?? [];
   const projects = projectsQuery.data ?? [];
 
+  const totalTasks = tasks.length;
+
+  const activeTasks = tasks.filter(
+    (task) => task.status === "active",
+  ).length;
+
+  const inProgressTasks = tasks.filter(
+    (task) => task.status === "in_progress",
+  ).length;
+
+  const completedTasks = tasks.filter(
+    (task) => task.status === "completed",
+  ).length;
+
+  const overallProgress =
+    totalTasks === 0
+      ? 0
+      : Math.round(
+        tasks.reduce(
+          (total, task) =>
+            total + task.progress,
+          0,
+        ) / totalTasks,
+      );
+
   return (
     <div className="tasks-page">
-      <div className="page-header">
-        <div>
-          <p className="eyebrow">NEXUS MODULE</p>
-          <h1>Tasks</h1>
-          <p>
-            Break projects into actionable work.
-          </p>
+      <div className="tasks-summary">
+        <div className="task-summary-card summary-tasks">
+          <div className="summary-card-content">
+            <span className="task-summary-label">
+              TOTAL TASKS
+            </span>
+
+            <strong className="task-summary-value">
+              {tasks.length}
+            </strong>
+          </div>
+
+          <div className="summary-icon">
+            <ListTodo />
+          </div>
+        </div>
+
+        <div className="task-summary-card summary-active">
+          <div className="summary-card-content">
+            <span className="task-summary-label">
+              ACTIVE
+            </span>
+
+            <strong className="task-summary-value">
+              {activeTasks}
+            </strong>
+          </div>
+
+          <div className="summary-icon">
+            <Play />
+          </div>
+        </div>
+
+        <div className="task-summary-card summary-progress">
+          <div className="summary-card-content">
+            <span className="task-summary-label">
+              IN PROGRESS
+            </span>
+
+            <strong className="task-summary-value">
+              {inProgressTasks}
+            </strong>
+          </div>
+
+          <div className="summary-icon">
+            <Activity />
+          </div>
+        </div>
+
+        <div className="task-summary-card summary-completed">
+          <div className="summary-card-content">
+            <span className="task-summary-label">
+              COMPLETED
+            </span>
+
+            <strong className="task-summary-value">
+              {completedTasks}
+            </strong>
+          </div>
+
+          <div className="summary-icon">
+            <Check />
+          </div>
+        </div>
+
+        <div className="task-summary-card summary-overall">
+          <div className="summary-card-content">
+            <span className="task-summary-label">
+              OVERALL PROGRESS
+            </span>
+
+            <strong className="task-summary-value">
+              {overallProgress}%
+            </strong>
+          </div>
+
+          <div className="summary-icon">
+            <CircleGauge />
+          </div>
         </div>
       </div>
 
@@ -223,17 +349,22 @@ export function Tasks() {
                   </button>
                 </div>
 
-                <p className="task-project">
-                  Project:{" "}
-                  {project
-                    ? project.title
-                    : "No project"}
-                </p>
+                <div className="task-project">
+                  <span>LINKED PROJECT</span>
+
+                  <strong>
+                    {project
+                      ? project.title
+                      : "No project"}
+                  </strong>
+                </div>
 
                 <div className="task-progress">
-                  <label>
-                    Progress: {task.progress}%
-                  </label>
+                  <div className="task-progress-header">
+                    <span>PROGRESS</span>
+
+                    <strong>{task.progress}%</strong>
+                  </div>
 
                   <input
                     type="range"
